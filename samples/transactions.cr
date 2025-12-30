@@ -11,8 +11,37 @@ statements = statements.first(40)
 
 # p! statements
 
-statements.each do |statement|
-  amount = "%.2f" % (statement.amount / 100.0)
-  balance = "%.2f" % (statement.balance / 100.0)
-  puts "#{statement.time.to_local.to_s("%Y-%m-%d %H:%M:%S")} | #{statement.description} | #{amount} | #{balance} | #{statement.mcc}"
+data = statements.map do |statement|
+  amount = (statement.amount / 100.0).format(decimal_places: 2)
+  balance = (statement.balance / 100.0).format(decimal_places: 2)
+
+  {
+    time:        statement.time,
+    description: statement.description,
+    amount:      amount,
+    balance:     balance,
+    mcc:         statement.mcc,
+  }
+end
+
+keys = [:time, :description, :amount, :balance, :mcc]
+
+widths = keys.map do |k|
+  data.map { |row| row[k].to_s.size }.max
+end
+
+data.each do |row|
+  cells = keys.map { |k| row[k].to_s }
+
+  line = cells.each_with_index.map do |cell, i|
+    key = keys[i]
+
+    if key == :amount || key == :balance || key == :mcc
+      cell.rjust(widths[i])
+    else
+      cell.ljust(widths[i])
+    end
+  end.join(" | ")
+
+  puts line
 end
