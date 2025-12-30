@@ -69,7 +69,7 @@ module MonobankApi
     #
     # Arguments:
     # - `webhook_url`: URL для отримання POST запитів з подіями (або пустий рядок для видалення)
-    def set_webhook(webhook_url : String) : Bool
+    def webhook=(webhook_url : String) : Bool
       response = @resource["/personal/webhook"].post(
         {webHookUrl: webhook_url}.to_json
       )
