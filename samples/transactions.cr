@@ -2,7 +2,7 @@ require "../src/monobank_api"
 
 def format_table(
   data : Array(Hash(String, _)),
-  align_right_keys = [] of String,
+  align_right_keys : Set(String) = Set(String).new,
   separator = " | ",
 ) : String
   return "" if data.empty?
@@ -10,7 +10,7 @@ def format_table(
   keys = data.first.keys
 
   width_by_key = keys.to_h do |key|
-    {key, data.max_of(&.[key].to_s.size)}
+    {key, data.max_of { |row| row[key]?.to_s.size }}
   end
 
   data.join('\n') do |row|
@@ -47,4 +47,4 @@ data = statements.map do |statement|
   }
 end
 
-puts format_table(data, ["amount", "balance"])
+puts format_table(data, Set{"amount", "balance"})
