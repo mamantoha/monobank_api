@@ -1,5 +1,8 @@
 # monobank_api
 
+[![GitHub release](https://img.shields.io/github/release/mamantoha/monobank_api.svg)](https://github.com/mamantoha/monobank_api/releases)
+[![License](https://img.shields.io/github/license/mamantoha/monobank_api.svg)](https://github.com/mamantoha/monobank_api/blob/main/LICENSE)
+
 Crystal library for [Monobank](https://monobank.ua) open API (v250818).
 
 ## About
