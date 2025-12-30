@@ -16,32 +16,29 @@ data = statements.map do |statement|
   balance = (statement.balance / 100.0).format(decimal_places: 2)
 
   {
-    time:        statement.time,
-    description: statement.description,
-    amount:      amount,
-    balance:     balance,
-    mcc:         statement.mcc,
+    :time        => statement.time,
+    :description => statement.description,
+    :amount      => amount,
+    :balance     => balance,
+    :mcc         => statement.mcc,
   }
 end
 
 keys = data.first.keys
 
-widths = keys.map do |k|
-  data.max_of(&.[k].to_s.size)
+width_by_key = keys.to_h do |k|
+  {k, data.max_of(&.[k].to_s.size)}
 end
 
+numeric_keys = Set{:amount, :balance, :mcc}
+
 data.each do |row|
-  cells = keys.map { |k| row[k].to_s }
+  line = keys.join(" | ") do |key|
+    value = row[key].to_s
+    width = width_by_key[key]
 
-  line = cells.each_with_index.map do |cell, i|
-    key = keys[i]
-
-    if key == :amount || key == :balance || key == :mcc
-      cell.rjust(widths[i])
-    else
-      cell.ljust(widths[i])
-    end
-  end.join(" | ")
+    numeric_keys.includes?(key) ? value.rjust(width) : value.ljust(width)
+  end
 
   puts line
 end
