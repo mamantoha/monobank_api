@@ -1,6 +1,6 @@
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
-Content-Length: 402
+Content-Length: 400
 Connection: keep-alive
 Server: n/a
 Access-Control-Allow-Origin: *
