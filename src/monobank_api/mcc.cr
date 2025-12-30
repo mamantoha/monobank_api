@@ -59,7 +59,7 @@ module MonobankApi
     # ```
     def self.short_description(mcc : Int32, lang : Symbol = :uk) : String?
       code_data = CODES[mcc]?
-      return nil unless code_data
+      return unless code_data
 
       case lang
       when :uk then code_data.short_description.uk
@@ -78,7 +78,7 @@ module MonobankApi
     # ```
     def self.full_description(mcc : Int32, lang : Symbol = :uk) : String?
       code_data = CODES[mcc]?
-      return nil unless code_data
+      return unless code_data
 
       case lang
       when :uk then code_data.full_description.uk
@@ -105,7 +105,7 @@ module MonobankApi
     # ```
     def self.group_description(mcc : Int32, lang : Symbol = :uk) : String?
       code_data = CODES[mcc]?
-      return nil unless code_data
+      return unless code_data
 
       case lang
       when :uk then code_data.group.description.uk
