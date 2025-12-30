@@ -3,6 +3,7 @@ module MonobankApi
     def initialize(@token : String)
       @resource = Crest::Resource.new(
         "https://api.monobank.ua",
+        user_agent: "MonobankApi Crystal Client v#{MonobankApi::VERSION}",
         headers: {"X-Token" => @token},
         handle_errors: false,
         json: true
