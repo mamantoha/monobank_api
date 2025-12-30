@@ -1,0 +1,8 @@
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+Content-Length: 40
+Connection: keep-alive
+Server: n/a
+Access-Control-Allow-Origin: *
+
+{"errorDescription":"Unknown 'X-Token'"}

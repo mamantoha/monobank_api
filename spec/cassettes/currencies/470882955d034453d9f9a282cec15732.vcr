@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Server: n/a
+Access-Control-Allow-Origin: *
+
+[{"currencyCodeA":840,"currencyCodeB":980,"date":1767090973,"rateBuy":42.1,"rateSell":42.5405},{"currencyCodeA":978,"currencyCodeB":980,"date":1767090973,"rateBuy":49.5,"rateSell":50.2008}]

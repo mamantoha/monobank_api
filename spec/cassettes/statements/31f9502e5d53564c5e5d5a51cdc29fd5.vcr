@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 521
+Connection: keep-alive
+Server: n/a
+Access-Control-Allow-Origin: *
+
+[{"id":"<STATEMENT_ID_1>","time":1767000000,"description":"Test purchase","mcc":5814,"originalMcc":5814,"amount":-2000,"operationAmount":-2000,"currencyCode":980,"commissionRate":0,"cashbackAmount":0,"balance":100000,"hold":false,"receiptId":"<RECEIPT_ID_1>"},{"id":"<STATEMENT_ID_2>","time":1767003600,"description":"Transfer in","mcc":4829,"originalMcc":4829,"amount":500000,"operationAmount":500000,"currencyCode":980,"commissionRate":0,"cashbackAmount":0,"balance":600000,"hold":false,"comment":"Top up <COMMENT>"}]

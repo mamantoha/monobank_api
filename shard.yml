@@ -5,6 +5,10 @@ dependencies:
   crest:
     github: mamantoha/crest
 
+development_dependencies:
+  vcr:
+    github: spoved/vcr.cr
+
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
 

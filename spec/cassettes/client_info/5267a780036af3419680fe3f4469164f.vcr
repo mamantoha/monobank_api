@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 512
+Connection: keep-alive
+Server: n/a
+Access-Control-Allow-Origin: *
+
+{"clientId":"<CLIENT_ID>","name":"<NAME>","webHookUrl":"<WEBHOOK>","permissions":"psfjm","accounts":[{"id":"acct_1","sendId":"send_1","currencyCode":980,"cashbackType":"UAH","balance":100000,"creditLimit":0,"maskedPan":["<MASKED_PAN>"],"type":"black","iban":"<IBAN>"}],"jars":[{"id":"jar_1","sendId":"jar_send_1","title":"Savings","description":"","currencyCode":980,"balance":5000,"goal":100000}]}
