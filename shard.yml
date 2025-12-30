@@ -1,0 +1,13 @@
+name: monobank_api
+version: 0.1.0
+
+dependencies:
+  crest:
+    github: mamantoha/crest
+
+authors:
+  - Anton Maminov <anton.maminov@gmail.com>
+
+crystal: '>= 1.0.0'
+
+license: MIT
