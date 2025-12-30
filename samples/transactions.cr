@@ -27,7 +27,7 @@ end
 keys = [:time, :description, :amount, :balance, :mcc]
 
 widths = keys.map do |k|
-  data.map { |row| row[k].to_s.size }.max
+  data.max_of(&.[k].to_s.size)
 end
 
 data.each do |row|
