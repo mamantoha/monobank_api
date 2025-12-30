@@ -10,7 +10,7 @@ def format_table(
   keys = data.first.keys
 
   width_by_key = keys.to_h do |key|
-    {key, data.max_of { |row| row[key]?.to_s.size }}
+    {key, data.max_of(&.[key]?.to_s.size)}
   end
 
   data.join('\n') do |row|
