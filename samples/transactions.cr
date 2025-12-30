@@ -24,7 +24,7 @@ data = statements.map do |statement|
   }
 end
 
-keys = [:time, :description, :amount, :balance, :mcc]
+keys = data.first.keys
 
 widths = keys.map do |k|
   data.max_of(&.[k].to_s.size)
