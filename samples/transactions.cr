@@ -43,7 +43,7 @@ data = statements.map do |statement|
     "description" => statement.description,
     "amount"      => amount,
     "balance"     => balance,
-    "mcc"         => statement.mcc,
+    "mcc"         => statement.mcc_short_description || statement.mcc,
   }
 end
 

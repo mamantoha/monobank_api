@@ -69,5 +69,46 @@ module MonobankApi
     # Найменування контрагента
     @[JSON::Field(key: "counterName")]
     property counter_name : String?
+
+    # Повертає коротку назву категорії транзакції за MCC кодом
+    #
+    # ```
+    # statement.mcc_short_description      # => "Продукти"
+    # statement.mcc_short_description(:en) # => "Grocery"
+    # statement.mcc_short_description(:ru) # => "Продукты"
+    # ```
+    def mcc_short_description(lang : Symbol = :uk) : String?
+      MCC.short_description(mcc, lang)
+    end
+
+    # Повертає повну назву категорії транзакції за MCC кодом
+    #
+    # ```
+    # statement.mcc_full_description      # => "Продуктові магазини, супермаркети"
+    # statement.mcc_full_description(:en) # => "Grocery Stores, Supermarkets"
+    # statement.mcc_full_description(:ru) # => "Продуктовые магазины, супермаркеты"
+    # ```
+    def mcc_full_description(lang : Symbol = :uk) : String?
+      MCC.full_description(mcc, lang)
+    end
+
+    # Повертає тип групи категорії транзакції за MCC кодом
+    #
+    # ```
+    # statement.mcc_group_type # => "ROS"
+    # ```
+    def mcc_group_type : String?
+      MCC.group_type(mcc)
+    end
+
+    # Повертає назву групи категорії транзакції за MCC кодом
+    #
+    # ```
+    # statement.mcc_group_description      # => "Послуги роздрібної торгівлі"
+    # statement.mcc_group_description(:en) # => "Retail Outlet Services"
+    # ```
+    def mcc_group_description(lang : Symbol = :uk) : String?
+      MCC.group_description(mcc, lang)
+    end
   end
 end
