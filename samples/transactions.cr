@@ -35,14 +35,11 @@ statements = statements.first(40)
 # p! statements
 
 data = statements.map do |statement|
-  amount = (statement.amount / 100.0).format(decimal_places: 2)
-  balance = (statement.balance / 100.0).format(decimal_places: 2)
-
   {
     "time"           => statement.time.to_local.to_s("%Y-%m-%d %H:%M:%S"),
     "description"    => statement.description,
-    "amount"         => amount,
-    "balance"        => balance,
+    "amount"         => (statement.amount / 100.0).format(decimal_places: 2),
+    "balance"        => (statement.balance / 100.0).format(decimal_places: 2),
     "mcc"            => statement.mcc_short_description || statement.mcc,
     "mcc_group_type" => statement.mcc_group_description || "",
   }
