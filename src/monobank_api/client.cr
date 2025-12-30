@@ -56,6 +56,32 @@ module MonobankApi
       end
     end
 
+    # Встановлення URL користувача для отримання подій про зміну балансу
+    #
+    # Для підтвердження коректності наданої адреси, на неї надсилається GET-запит.
+    # Сервер має відповісти строго HTTP статус-кодом 200.
+    # Якщо валідацію пройдено, на задану адресу починають надсилатися POST запити з подіями.
+    #
+    # Події надсилаються у форматі: `{type:"StatementItem", data:{account:"...", statementItem:{#StatementItem}}}`
+    #
+    # Якщо сервіс не відповість протягом 5с, сервіс повторить спробу ще через 60 та 600 секунд.
+    # Якщо на третю спробу відповідь отримана не буде, функція буде вимкнута.
+    #
+    # Arguments:
+    # - `webhook_url`: URL для отримання POST запитів з подіями (або пустий рядок для видалення)
+    def set_webhook(webhook_url : String) : Bool
+      response = @resource["/personal/webhook"].post(
+        {webHookUrl: webhook_url}.to_json
+      )
+
+      if response.success?
+        true
+      else
+        handle_exception(response.body)
+        false
+      end
+    end
+
     private def handle_exception(response_body)
       json = JSON.parse(response_body)
 
