@@ -1,5 +1,6 @@
 # monobank_api
 
+[![Crystal CI](https://github.com/mamantoha/monobank_api/actions/workflows/crystal.yml/badge.svg)](https://github.com/mamantoha/monobank_api/actions/workflows/crystal.yml)
 [![GitHub release](https://img.shields.io/github/release/mamantoha/monobank_api.svg)](https://github.com/mamantoha/monobank_api/releases)
 [![License](https://img.shields.io/github/license/mamantoha/monobank_api.svg)](https://github.com/mamantoha/monobank_api/blob/main/LICENSE)
 
