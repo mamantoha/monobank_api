@@ -45,14 +45,18 @@ statements = client.statements(account_id, from, to)
 
 # Get MCC descriptions for transactions
 statements.each do |statement|
-  puts statement.mcc_short_description # => "Продукти"
-  puts statement.mcc_full_description  # => "Продуктові магазини, супермаркети"
-  puts statement.mcc_group_type        # => "ROS"
-  puts statement.mcc_group_description # => "Послуги роздрібної торгівлі"
+  puts statement.time                  # => 2025-12-29 09:20:00 UTC
+  puts statement.description           # => "Spotify"
+  puts statement.amount                # => -21138
+  puts statement.balance               # => 100000
+  puts statement.mcc_short_description # => "Цифрові товари"
+  puts statement.mcc_full_description  # => "Цифрові товари: книги, фільми, музика"
+  puts statement.mcc_group_type        # => "MS"
+  puts statement.mcc_group_description # => "Інші магазини"
 
   # Multi-language support
-  puts statement.mcc_short_description(:en) # => "Grocery"
-  puts statement.mcc_full_description(:ru)  # => "Продуктовые магазины, супермаркеты"
+  puts statement.mcc_short_description(:en) # => "Digital Goods"
+  puts statement.mcc_full_description(:ru)  # => "Цифровые товары: книги, фильмы, музыка"
 end
 
 # Use MCC module directly
