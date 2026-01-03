@@ -55,6 +55,9 @@ describe MonobankApi::Client do
           statement.mcc_short_description.should eq("Фаст-фуд")
           statement.mcc_full_description.should eq("Ресторани швидкого харчування")
           statement.mcc_group_type.should eq("MS")
+          statement.currency_name.should eq("Ukrainian Hryvnia")
+          statement.currency_code_alpha.should eq("UAH")
+          statement.currency_symbol.should eq("₴")
         end
       end
     end

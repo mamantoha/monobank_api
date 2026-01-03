@@ -43,7 +43,7 @@ to = Time.local
 
 statements = client.statements(account_id, from, to)
 
-# Get MCC descriptions for transactions
+# Get MCC descriptions and currency info for transactions
 statements.each do |statement|
   puts statement.time                  # => 2025-12-29 09:20:00 UTC
   puts statement.description           # => "Spotify"
@@ -54,17 +54,37 @@ statements.each do |statement|
   puts statement.mcc_group_type        # => "MS"
   puts statement.mcc_group_description # => "Інші магазини"
 
-  # Multi-language support
+  # Multi-language support for MCC
   puts statement.mcc_short_description(:en) # => "Digital Goods"
   puts statement.mcc_full_description(:ru)  # => "Цифровые товары: книги, фильмы, музыка"
+
+  # Currency information
+  puts statement.currency_code_alpha # => "UAH"
+  puts statement.currency_name       # => "Ukrainian Hryvnia"
+  puts statement.currency_symbol     # => "₴"
 end
 
 # Use MCC module directly
-MonobankApi::MCC.short_description(5411)      # => "Продукти"
-MonobankApi::MCC.full_description(5411, :en)  # => "Grocery Stores, Supermarkets"
-MonobankApi::MCC.group_type(5411)             # => "ROS"
-MonobankApi::MCC.group_description(5411, :ru) # => "Услуги розничной торговли"
+MonobankApi::MCC.short_description(5411)     # => "Продукти"
+MonobankApi::MCC.full_description(5411, :en) # => "Grocery Stores, Supermarkets"
+MonobankApi::MCC.group_type(5411)            # => "ROS"
+
+# Use Currency module directly
+MonobankApi::CurrencyData.name(980)       # => "Ukrainian Hryvnia"
+MonobankApi::CurrencyData.code_alpha(980) # => "UAH"
+MonobankApi::CurrencyData.symbol(980)     # => "₴"
 ```
+
+## Currency Information
+
+Бібліотека включає в себе дані про валюти за ISO 4217 кодами з підтримкою багатомовних назв та символів. Дані взято з репозиторію [Our World in Data - Currency](https://github.com/ourworldindata/currency).
+
+### Можливості Currency
+
+- **Назва валюти** - `CurrencyData.name(iso_num)` (наприклад, "Ukrainian Hryvnia")
+- **ISO 4217 Код** - `CurrencyData.code_alpha(iso_num)` (наприклад, "UAH")
+- **Символ** - `CurrencyData.symbol(iso_num)` (наприклад, "₴")
+- **Рідний символ** - `CurrencyData.symbol_native(iso_num)` (наприклад, "грн")
 
 ## MCC Codes
 
