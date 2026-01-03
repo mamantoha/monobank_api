@@ -110,5 +110,32 @@ module MonobankApi
     def mcc_group_description(lang : Symbol = :uk) : String?
       MCC.group_description(mcc, lang)
     end
+
+    # Повертає назву валюти рахунку за ISO 4217 кодом
+    #
+    # ```
+    # statement.currency_name # => "Ukrainian Hryvnia"
+    # ```
+    def currency_name : String?
+      CurrencyData.name(currency_code)
+    end
+
+    # Повертає ISO 4217 трьохлітерний код валюти рахунку
+    #
+    # ```
+    # statement.currency_code_alpha # => "UAH"
+    # ```
+    def currency_code_alpha : String?
+      CurrencyData.code_alpha(currency_code)
+    end
+
+    # Повертає символ валюти рахунку
+    #
+    # ```
+    # statement.currency_symbol # => "₴"
+    # ```
+    def currency_symbol : String?
+      CurrencyData.symbol(currency_code)
+    end
   end
 end
