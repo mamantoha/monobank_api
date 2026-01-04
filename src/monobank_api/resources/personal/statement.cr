@@ -73,6 +73,7 @@ module MonobankApi
     # Повертає коротку назву категорії транзакції за MCC кодом
     #
     # ```
+    # statement = MonobankApi::Client.new(token).statements(...).first
     # statement.mcc_short_description      # => "Продукти"
     # statement.mcc_short_description(:en) # => "Grocery"
     # statement.mcc_short_description(:ru) # => "Продукты"
@@ -84,6 +85,7 @@ module MonobankApi
     # Повертає повну назву категорії транзакції за MCC кодом
     #
     # ```
+    # statement = MonobankApi::Client.new(token).statements(...).first
     # statement.mcc_full_description      # => "Продуктові магазини, супермаркети"
     # statement.mcc_full_description(:en) # => "Grocery Stores, Supermarkets"
     # statement.mcc_full_description(:ru) # => "Продуктовые магазины, супермаркеты"
@@ -104,6 +106,7 @@ module MonobankApi
     # Повертає назву групи категорії транзакції за MCC кодом
     #
     # ```
+    # statement = MonobankApi::Client.new(token).statements(...).first
     # statement.mcc_group_description      # => "Послуги роздрібної торгівлі"
     # statement.mcc_group_description(:en) # => "Retail Outlet Services"
     # ```
@@ -114,6 +117,7 @@ module MonobankApi
     # Повертає назву валюти рахунку за ISO 4217 кодом
     #
     # ```
+    # statement = MonobankApi::Client.new(token).statements(...).first
     # statement.currency_name # => "Ukrainian Hryvnia"
     # ```
     def currency_name : String?
@@ -123,6 +127,7 @@ module MonobankApi
     # Повертає ISO 4217 трьохлітерний код валюти рахунку
     #
     # ```
+    # statement = MonobankApi::Client.new(token).statements(...).first
     # statement.currency_code_alpha # => "UAH"
     # ```
     def currency_code_alpha : String?
@@ -132,6 +137,7 @@ module MonobankApi
     # Повертає символ валюти рахунку
     #
     # ```
+    # statement = MonobankApi::Client.new(token).statements(...).first
     # statement.currency_symbol # => "₴"
     # ```
     def currency_symbol : String?

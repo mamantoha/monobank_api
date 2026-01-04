@@ -97,10 +97,10 @@ puts "100 USD = #{result.round(2)} EUR"
 
 ### Можливості Currency
 
-- **Назва валюти** - `CurrencyData.name(iso_num)` (наприклад, "Ukrainian Hryvnia")
-- **ISO 4217 Код** - `CurrencyData.code_alpha(iso_num)` (наприклад, "UAH")
-- **Символ** - `CurrencyData.symbol(iso_num)` (наприклад, "₴")
-- **Рідний символ** - `CurrencyData.symbol_native(iso_num)` (наприклад, "грн")
+- **Назва валюти** - `MonobankApi::CurrencyData.name(iso_num)` (наприклад, "Ukrainian Hryvnia")
+- **ISO 4217 Код** - `MonobankApi::CurrencyData.code_alpha(iso_num)` (наприклад, "UAH")
+- **Символ** - `MonobankApi::CurrencyData.symbol(iso_num)` (наприклад, "₴")
+- **Рідний символ** - `MonobankApi::CurrencyData.symbol_native(iso_num)` (наприклад, "грн")
 
 ## MCC Codes
 
@@ -108,10 +108,10 @@ puts "100 USD = #{result.round(2)} EUR"
 
 ### Можливості MCC
 
-- **Коротка назва** - `short_description(mcc, :uk/:en/:ru)`
-- **Повна назва** - `full_description(mcc, :uk/:en/:ru)`
-- **Тип групи** - `group_type(mcc)` (повертає код групи, наприклад "ROS", "HR", "AL")
-- **Назва групи** - `group_description(mcc, :uk/:en/:ru)`
+- **Коротка назва** - `MonobankApi::MCC.short_description(mcc, :uk/:en/:ru)`
+- **Повна назва** - `MonobankApi::MCC.full_description(mcc, :uk/:en/:ru)`
+- **Тип групи** - `MonobankApi::MCC.group_type(mcc)` (повертає код групи, наприклад "ROS", "HR", "AL")
+- **Назва групи** - `MonobankApi::MCC.group_description(mcc, :uk/:en/:ru)`
 
 За замовчуванням використовується українська мова.
 

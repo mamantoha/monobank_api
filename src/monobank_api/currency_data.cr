@@ -35,8 +35,8 @@ module MonobankApi
     # Повертає назву валюти за ISO 4217 кодом
     #
     # ```
-    # CurrencyData.name(980) # => "Ukrainian Hryvnia"
-    # CurrencyData.name(840) # => "United States Dollar"
+    # MonobankApi::CurrencyData.name(980) # => "Ukrainian Hryvnia"
+    # MonobankApi::CurrencyData.name(840) # => "United States Dollar"
     # ```
     def self.name(iso_num : Int32) : String?
       load_data
