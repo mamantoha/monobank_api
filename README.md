@@ -91,6 +91,20 @@ puts "100 USD = #{result.round(2)} EUR"
 
 Конвертер автоматично отримує актуальні курси валют з публічного API Monobank при ініціалізації. Підтримується конвертація між будь-якими валютами через прямі курси або через UAH як проміжну валюту.
 
+Якщо у вас вже є кешований список курсів, ви можете ініціалізувати конвертер без запиту до API:
+
+```crystal
+# варіант 1: з масиву курсів
+rates = MonobankApi::Client.new("").currencies
+converter = MonobankApi::CurrencyConverter.new(rates)
+
+# варіант 2: з кешованого JSON
+rates_json = rates.to_json
+converter = MonobankApi::CurrencyConverter.new(rates_json)
+
+converter.convert(100, "USD", "EUR")
+```
+
 ## Currency Information
 
 Бібліотека включає в себе дані про валюти за ISO 4217 кодами з підтримкою багатомовних назв та символів. Дані взято з репозиторію [Our World in Data - Currency](https://github.com/ourworldindata/currency).
