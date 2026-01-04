@@ -13,4 +13,16 @@ describe MonobankApi::CurrencyConverter do
       expect_raises(MonobankApi::UnknownCurrencyError) { converter.convert(10, "FOO", "USD") }
     end
   end
+
+  it "converts using cached rates JSON" do
+    VCR.use_cassette("currencies") do
+      client = MonobankApi::Client.new("")
+      rates_json = client.currencies.to_json
+
+      converter = MonobankApi::CurrencyConverter.new(rates_json)
+
+      converter.convert(100, "USD", "UAH").should be_close(4205.0, 0.0001)
+      converter.convert(100, "USD", "EUR").should be_close(84.8896, 0.01)
+    end
+  end
 end
