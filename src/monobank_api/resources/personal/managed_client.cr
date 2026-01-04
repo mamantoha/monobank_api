@@ -5,15 +5,15 @@ module MonobankApi
 
     # Ідентифікатор клієнта
     @[JSON::Field(key: "clientId")]
-    property client_id : String
+    getter client_id : String
 
     # РНОКПП
-    property tin : Int32
+    getter tin : Int32
 
     # Ім'я клієнта
-    property name : String
+    getter name : String
 
     # Перелік доступних рахунків ФОП
-    property accounts : Array(ManagedClientAccount)
+    getter accounts : Array(ManagedClientAccount)
   end
 end

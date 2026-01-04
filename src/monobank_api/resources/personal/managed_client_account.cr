@@ -4,24 +4,24 @@ module MonobankApi
     include JSON::Serializable
 
     # Ідентифікатор рахунку
-    property id : String
+    getter id : String
 
     # Баланс рахунку в мінімальних одиницях валюти (копійках, центах)
-    property balance : Int32
+    getter balance : Int32
 
     # Кредитний ліміт
     @[JSON::Field(key: "creditLimit")]
-    property credit_limit : Int32
+    getter credit_limit : Int32
 
     # Тип рахунку (fop)
     @[JSON::Field(key: "type")]
-    property account_type : String
+    getter account_type : String
 
     # Код валюти рахунку відповідно ISO 4217
     @[JSON::Field(key: "currencyCode")]
-    property currency_code : Int32
+    getter currency_code : Int32
 
     # IBAN рахунку
-    property iban : String
+    getter iban : String
   end
 end
