@@ -40,7 +40,7 @@ data = statements.map do |statement|
 
   {
     "time"           => statement.time.to_local.to_s("%Y-%m-%d %H:%M:%S"),
-    "description"    => statement.description,
+    "description"    => statement.description.inspect,
     "amount"         => amount,
     "balance"        => balance,
     "mcc"            => statement.mcc_short_description || statement.mcc,
