@@ -21,7 +21,7 @@ module MonobankApi
       if response.success?
         Array(Currency).from_json(response.body)
       else
-        handle_exception(response.body)
+        handle_exception(response)
       end
     end
 
@@ -34,7 +34,7 @@ module MonobankApi
       if response.success?
         ClientInfo.from_json(response.body)
       else
-        handle_exception(response.body)
+        handle_exception(response)
       end
     end
 
@@ -55,7 +55,7 @@ module MonobankApi
       if response.success?
         Array(Statement).from_json(response.body)
       else
-        handle_exception(response.body)
+        handle_exception(response)
       end
     end
 
@@ -80,18 +80,31 @@ module MonobankApi
       if response.success?
         true
       else
-        handle_exception(response.body)
+        handle_exception(response)
         false
       end
     end
 
-    private def handle_exception(response_body)
-      json = JSON.parse(response_body)
+    private def handle_exception(response)
+      json = JSON.parse(response.body)
+      error_message = json["errorDescription"]?.try(&.as_s) || "Unknown error: `#{response.body}`"
 
-      if error_description = json["errorDescription"]?
-        raise Error.new(error_description.as_s)
+      # Map HTTP status codes to specific exceptions
+      case response.status_code
+      when 400
+        raise BadRequestError.new(error_message)
+      when 401, 403
+        raise InvalidTokenError.new(error_message)
+      when 404
+        raise NotFoundError.new(error_message)
+      when 429
+        raise RateLimitError.new(error_message)
+      when 500, 502
+        raise ServerError.new(error_message)
+      when 503
+        raise ServiceUnavailableError.new(error_message)
       else
-        raise Error.new("Unknown error: `#{response_body}`")
+        raise Error.new(error_message)
       end
     end
   end
