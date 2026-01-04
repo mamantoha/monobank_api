@@ -115,7 +115,11 @@ module MonobankApi
 
     private def handle_exception(response)
       json = JSON.parse(response.body)
-      error_message = json["errorDescription"]?.try(&.as_s) || "Unknown error: `#{response.body}`"
+
+      error_message =
+        json["errorDescription"]?.try(&.as_s) ||
+          json["errText"]?.try(&.as_s) ||
+          "Unknown error: `#{response.body}`"
 
       # Map HTTP status codes to specific exceptions
       case response.status_code
