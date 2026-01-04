@@ -76,6 +76,18 @@ module MonobankApi
       @@data[iso_num]?.try(&.symbol_native)
     end
 
+    # Повертає ISO 4217 числовий код за трьохлітерним кодом
+    #
+    # ```
+    # MonobankApi::CurrencyData.iso_num("UAH") # => 980
+    # MonobankApi::CurrencyData.iso_num("USD") # => 840
+    # ```
+    def self.iso_num(code_alpha : String) : Int32?
+      load_data
+      code = code_alpha.upcase
+      @@data.values.find { |info| info.iso_code.upcase == code }.try(&.iso_num)
+    end
+
     private alias Currencies = Hash(String, CurrenciesValue)
 
     private class CurrenciesValue

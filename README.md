@@ -73,6 +73,10 @@ MonobankApi::MCC.group_type(5411)            # => "ROS"
 MonobankApi::CurrencyData.name(980)       # => "Ukrainian Hryvnia"
 MonobankApi::CurrencyData.code_alpha(980) # => "UAH"
 MonobankApi::CurrencyData.symbol(980)     # => "₴"
+
+# Convert currencies (amount, from, to)
+converter = MonobankApi::CurrencyConverter.new
+converter.convert(100, "USD", "EUR") # => 83.8632
 ```
 
 ## Currency Information
