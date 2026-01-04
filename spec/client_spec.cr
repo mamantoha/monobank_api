@@ -64,11 +64,11 @@ describe MonobankApi::Client do
   end
 
   describe "error handling" do
-    it "raises Error on invalid token" do
+    it "raises InvalidTokenError on invalid token" do
       VCR.use_cassette("invalid_token") do
         client = MonobankApi::Client.new("invalid_token")
 
-        expect_raises(MonobankApi::Error) do
+        expect_raises(MonobankApi::InvalidTokenError) do
           client.info
         end
       end

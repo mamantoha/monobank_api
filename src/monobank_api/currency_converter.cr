@@ -14,13 +14,13 @@ module MonobankApi
     # converter.convert(100, "USD", "EUR")
     # ```
     def convert(amount : Number, from_code : String, to_code : String) : Float64
-      from_iso = CurrencyData.iso_num(from_code) || raise ArgumentError.new("Unknown currency #{from_code}")
-      to_iso = CurrencyData.iso_num(to_code) || raise ArgumentError.new("Unknown currency #{to_code}")
+      from_iso = CurrencyData.iso_num(from_code) || raise UnknownCurrencyError.new("Unknown currency: #{from_code}")
+      to_iso = CurrencyData.iso_num(to_code) || raise UnknownCurrencyError.new("Unknown currency: #{to_code}")
       convert_iso(amount.to_f, from_iso, to_iso)
     end
 
     private def convert_iso(amount : Float64, from_iso : Int32, to_iso : Int32, depth = 0) : Float64
-      raise "Conversion depth exceeded" if depth > 4
+      raise ConversionDepthExceededError.new("Currency conversion recursion depth exceeded (depth: #{depth})") if depth > 4
       return amount if from_iso == to_iso
 
       if direct = find_rate(from_iso, to_iso)
@@ -41,7 +41,7 @@ module MonobankApi
         return convert_iso(to_uah, UAH_ISO, to_iso, depth + 1)
       end
 
-      raise "No conversion rate for #{from_iso} -> #{to_iso}"
+      raise NoConversionRateError.new("No conversion rate available for #{from_iso} -> #{to_iso}")
     end
 
     private def find_rate(code_a : Int32, code_b : Int32) : Currency?
