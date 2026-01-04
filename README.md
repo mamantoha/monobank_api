@@ -79,6 +79,18 @@ converter = MonobankApi::CurrencyConverter.new
 converter.convert(100, "USD", "EUR") # => 83.8632
 ```
 
+## Converting Currency
+
+Бібліотека надає зручний конвертер валют, який використовує актуальні курси з Monobank API.
+
+```crystal
+converter = MonobankApi::CurrencyConverter.new
+result = converter.convert(100, "USD", "EUR")
+puts "100 USD = #{result.round(2)} EUR"
+```
+
+Конвертер автоматично отримує актуальні курси валют з публічного API Monobank при ініціалізації. Підтримується конвертація між будь-якими валютами через прямі курси або через UAH як проміжну валюту.
+
 ## Currency Information
 
 Бібліотека включає в себе дані про валюти за ISO 4217 кодами з підтримкою багатомовних назв та символів. Дані взято з репозиторію [Our World in Data - Currency](https://github.com/ourworldindata/currency).
