@@ -1,10 +1,14 @@
 module MonobankApi
   class Client
+    BASE_URL = "https://api.monobank.ua"
+
+    Log = MonobankApi::Log.for(self)
+
     USER_AGENT = "MonobankApi-Crystal/#{MonobankApi::VERSION} (+https://github.com/mamantoha/monobank_api)"
 
     def initialize(@token : String, user_agent : String? = nil)
       @resource = Crest::Resource.new(
-        "https://api.monobank.ua",
+        BASE_URL,
         user_agent: user_agent || USER_AGENT,
         headers: {"X-Token" => @token},
         handle_errors: false,
@@ -16,7 +20,13 @@ module MonobankApi
     #
     # Інформація кешується та оновлюється не частіше 1 разу на 5 хвилин
     def currencies : Array(Currency)
-      response = @resource["/bank/currency"].get
+      path = "/bank/currency"
+
+      Log.debug { "GET #{BASE_URL}#{path}" }
+
+      response = @resource[path].get
+
+      log_response(path, response)
 
       if response.success?
         Array(Currency).from_json(response.body)
@@ -29,7 +39,13 @@ module MonobankApi
     #
     # Обмеження на використання функції: не частіше ніж 1 раз у 60 секунд
     def info : ClientInfo
-      response = @resource["/personal/client-info"].get
+      path = "/personal/client-info"
+
+      Log.debug { "GET #{BASE_URL}#{path}" }
+
+      response = @resource[path].get
+
+      log_response(path, response)
 
       if response.success?
         ClientInfo.from_json(response.body)
@@ -50,7 +66,11 @@ module MonobankApi
     def statements(account : String, from : Time, to : Time? = nil) : Array(Statement)
       path = "/personal/statement/#{account}/#{from.to_unix}/#{to.to_unix}"
 
+      Log.debug { "GET #{BASE_URL}#{path}" }
+
       response = @resource[path].get
+
+      log_response(path, response)
 
       if response.success?
         Array(Statement).from_json(response.body)
@@ -73,9 +93,17 @@ module MonobankApi
     # Arguments:
     # - `webhook_url`: URL для отримання POST запитів з подіями (або пустий рядок для видалення)
     def webhook=(webhook_url : String) : Bool
-      response = @resource["/personal/webhook"].post(
+      path = "/personal/webhook"
+
+      response = @resource[path].post(
         {webHookUrl: webhook_url}.to_json
       )
+
+      log_url = webhook_url.empty? ? "<removed>" : webhook_url
+
+      Log.debug { "POST #{BASE_URL}#{path} status=#{response.status_code} url=#{log_url}" }
+
+      log_response(path, response)
 
       if response.success?
         true
@@ -87,7 +115,11 @@ module MonobankApi
 
     private def handle_exception(response)
       json = JSON.parse(response.body)
-      error_message = json["errorDescription"]?.try(&.as_s) || "Unknown error: `#{response.body}`"
+
+      error_message =
+        json["errorDescription"]?.try(&.as_s) ||
+          json["errText"]?.try(&.as_s) ||
+          "Unknown error: `#{response.body}`"
 
       # Map HTTP status codes to specific exceptions
       case response.status_code
@@ -106,6 +138,13 @@ module MonobankApi
       else
         raise Error.new(error_message)
       end
+    end
+
+    private def log_response(path : String, response)
+      body = response.body
+      Log.debug { "Response #{path} status=#{response.status_code} body=#{body.inspect}" }
+    rescue e
+      Log.debug { "Response #{path} status=#{response.status_code} (failed to log body: #{e.message})" }
     end
   end
 end

@@ -1,5 +1,8 @@
 require "../src/monobank_api"
 
+level = Log::Severity.parse?(ENV["LOG_LEVEL"]? || "info") || Log::Severity::Info
+Log.setup(level)
+
 def format_table(
   data : Array(Hash(String, _)),
   align_right_keys : Set(String) = Set(String).new,
@@ -37,11 +40,13 @@ statements = statements.first(40)
 data = statements.map do |statement|
   amount = (statement.amount / 100.0).format(decimal_places: 2) + "#{statement.currency_symbol}"
   balance = (statement.balance / 100.0).format(decimal_places: 2) + "#{statement.currency_symbol}"
+  cashback_amount = (statement.cashback_amount / 100.0).format(decimal_places: 2) + "#{statement.currency_symbol}"
 
   {
     "time"           => statement.time.to_local.to_s("%Y-%m-%d %H:%M:%S"),
     "description"    => statement.description.gsub(/[[:space:]]+/, " ").strip,
     "amount"         => amount,
+    "cashback"       => cashback_amount,
     "balance"        => balance,
     "mcc"            => statement.mcc_short_description || statement.mcc,
     "mcc_group_type" => statement.mcc_group_description || "",

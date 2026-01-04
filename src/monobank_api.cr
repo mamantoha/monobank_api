@@ -1,5 +1,6 @@
 require "json"
 require "crest"
+require "./monobank_api/log"
 require "./monobank_api/mcc"
 require "./monobank_api/currency_data"
 require "./monobank_api/currency_converter"
