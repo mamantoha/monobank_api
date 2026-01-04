@@ -53,9 +53,9 @@ module MonobankApi
     # Get short description for MCC code
     #
     # ```
-    # MCC.short_description(5411)      # => "Продукти"
-    # MCC.short_description(5411, :en) # => "Grocery"
-    # MCC.short_description(5411, :ru) # => "Продукты"
+    # MonobankApi::MCC.short_description(5411)      # => "Продукти"
+    # MonobankApi::MCC.short_description(5411, :en) # => "Grocery"
+    # MonobankApi::MCC.short_description(5411, :ru) # => "Продукты"
     # ```
     def self.short_description(mcc : Int32, lang : Symbol = :uk) : String?
       code_data = CODES[mcc]?
@@ -72,9 +72,9 @@ module MonobankApi
     # Get full description for MCC code
     #
     # ```
-    # MCC.full_description(5411)      # => "Продуктові магазини, супермаркети"
-    # MCC.full_description(5411, :en) # => "Grocery Stores, Supermarkets"
-    # MCC.full_description(5411, :ru) # => "Продуктовые магазины, супермаркеты"
+    # MonobankApi::MCC.full_description(5411)      # => "Продуктові магазини, супермаркети"
+    # MonobankApi::MCC.full_description(5411, :en) # => "Grocery Stores, Supermarkets"
+    # MonobankApi::MCC.full_description(5411, :ru) # => "Продуктовые магазины, супермаркеты"
     # ```
     def self.full_description(mcc : Int32, lang : Symbol = :uk) : String?
       code_data = CODES[mcc]?
@@ -91,7 +91,7 @@ module MonobankApi
     # Get group type for MCC code
     #
     # ```
-    # MCC.group_type(5411) # => "ROS"
+    # MonobankApi::MCC.group_type(5411) # => "ROS"
     # ```
     def self.group_type(mcc : Int32) : String?
       CODES[mcc]?.try(&.group.type)
@@ -100,8 +100,8 @@ module MonobankApi
     # Get group description for MCC code
     #
     # ```
-    # MCC.group_description(5411)      # => "Послуги роздрібної торгівлі"
-    # MCC.group_description(5411, :en) # => "Retail Outlet Services"
+    # MonobankApi::MCC.group_description(5411)      # => "Послуги роздрібної торгівлі"
+    # MonobankApi::MCC.group_description(5411, :en) # => "Retail Outlet Services"
     # ```
     def self.group_description(mcc : Int32, lang : Symbol = :uk) : String?
       code_data = CODES[mcc]?
