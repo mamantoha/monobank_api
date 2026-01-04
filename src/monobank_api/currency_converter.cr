@@ -7,6 +7,16 @@ module MonobankApi
       @rates = Client.new("").currencies
     end
 
+    # Initialize converter with pre-fetched rates array
+    def initialize(rates : Array(Currency))
+      @rates = rates
+    end
+
+    # Initialize converter with cached JSON string containing rates
+    def initialize(rates_json : String)
+      @rates = parse_rates(rates_json)
+    end
+
     # Convert amount from one currency to another using ISO 4217 alpha codes
     #
     # ```
@@ -54,6 +64,12 @@ module MonobankApi
 
     private def inverse_rate(rate : Currency) : Float64?
       rate.rate_cross || rate.rate_sell || rate.rate_buy
+    end
+
+    private def parse_rates(json : String) : Array(Currency)
+      Array(Currency).from_json(json)
+    rescue e
+      raise ArgumentError.new("Invalid currency rates JSON: #{e.message}")
     end
   end
 end
