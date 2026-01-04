@@ -23,7 +23,7 @@ module MonobankApi
     getter original_mcc : Int32
 
     # Статус блокування суми
-    property? hold : Bool
+    getter? hold : Bool
 
     # Сума у валюті рахунку в мінімальних одиницях валюти (копійках, центах)
     getter amount : Int64
