@@ -26,4 +26,16 @@ module MonobankApi
   # Raised when the API is temporarily unavailable
   class ServiceUnavailableError < Error
   end
+
+  # Raised when an unknown currency code is provided
+  class UnknownCurrencyError < Error
+  end
+
+  # Raised when no conversion rate is available between currencies
+  class NoConversionRateError < Error
+  end
+
+  # Raised when currency conversion recursion depth is exceeded
+  class ConversionDepthExceededError < Error
+  end
 end
