@@ -62,8 +62,10 @@ module MonobankApi
     # Arguments:
     # - `account`: Ідентифікатор рахунку або банки з переліків або 0 - дефолтний рахунок
     # - `from`: Початок часу виписки
-    # - `to`: Останній час виписки (якщо відсутній, буде використовуватись поточний час)
+    # - `to`: Останній час виписки (необов'язковий, за замовчуванням `from + 31 діб + 1 година`)
     def statements(account : String, from : Time, to : Time? = nil) : Array(Statement)
+      to ||= from + 31.days + 1.hour
+
       path = "/personal/statement/#{account}/#{from.to_unix}/#{to.to_unix}"
 
       Log.debug { "GET #{BASE_URL}#{path}" }

@@ -30,10 +30,15 @@ token = ARGV[0]? || raise "Usage: statements.cr <token>"
 client = MonobankApi::Client.new(token)
 
 account_id = "Wr0FiCYJwhywOKCRhKtyIA"
+
 from = 31.days.ago
 to = Time.local
 statements = client.statements(account_id, from, to)
 statements = statements.first(40)
+
+# from = Time.utc(2017, 1, 1)
+# statements = client.statements(account_id, from)
+# Unhandled exception: Value field 'to' out of bounds (MonobankApi::BadRequestError)
 
 # p! statements
 
