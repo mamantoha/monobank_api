@@ -36,7 +36,7 @@ info.accounts.each do |account|
   puts "  IBAN: #{account.iban}"
 end
 
-if info.jars.any?
+if info.jars.present?
   puts "\n\n🏺 JARS:"
   puts "─" * 80
 
