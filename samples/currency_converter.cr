@@ -42,7 +42,7 @@ def load_converter_from_cache(path : String) : MonobankApi::CurrencyConverter
 end
 
 def fetch_and_cache_converter(path : String) : MonobankApi::CurrencyConverter
-  client = MonobankApi::Client.new("")
+  client = MonobankApi::Client.new
   rates = client.currencies
 
   FileUtils.mkdir_p(File.dirname(path))

@@ -95,7 +95,7 @@ puts "100 USD = #{result.round(2)} EUR"
 
 ```crystal
 # варіант 1: з масиву курсів
-rates = MonobankApi::Client.new("").currencies
+rates = MonobankApi::Client.new.currencies
 converter = MonobankApi::CurrencyConverter.new(rates)
 
 # варіант 2: з кешованого JSON

@@ -16,7 +16,7 @@ describe MonobankApi::CurrencyConverter do
 
   it "converts using cached rates JSON" do
     VCR.use_cassette("currencies") do
-      client = MonobankApi::Client.new("")
+      client = MonobankApi::Client.new
       rates_json = client.currencies.to_json
 
       converter = MonobankApi::CurrencyConverter.new(rates_json)

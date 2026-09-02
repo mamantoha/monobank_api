@@ -3,7 +3,7 @@ require "../src/monobank_api"
 level = Log::Severity.parse?(ENV["LOG_LEVEL"]? || "info") || Log::Severity::Info
 Log.setup(level)
 
-client = MonobankApi::Client.new("")
+client = MonobankApi::Client.new
 
 currencies = client.currencies
 
