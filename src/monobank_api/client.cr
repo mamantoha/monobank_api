@@ -20,6 +20,10 @@ module MonobankApi
       new("", user_agent)
     end
 
+    def self.currencies
+      new.currencies
+    end
+
     # Отримати базовий перелік курсів валют monobank
     #
     # Інформація кешується та оновлюється не частіше 1 разу на 5 хвилин

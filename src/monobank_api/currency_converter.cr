@@ -4,7 +4,7 @@ module MonobankApi
     UAH_ISO = 980
 
     def initialize
-      @rates = Client.new.currencies
+      @rates = Client.currencies
     end
 
     # Initialize converter with pre-fetched rates array
